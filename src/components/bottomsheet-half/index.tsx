@@ -16,7 +16,6 @@ export const BottomsheetHalf = (props: {
 
     const [{ y }, set] = useSpring(() => ({ y: 0 }));
 
-    const [inScroll, setInScroll] = useState(true);
     const open = (canceled: boolean) => {
       set({
         y: 0,
@@ -35,7 +34,7 @@ export const BottomsheetHalf = (props: {
         props.close && props.close();
       }, 300);
 
-      return () => clxearTimeout(timeout);
+      return () => clearTimeout(timeout);
     };
 
     const bind = useDrag(
@@ -53,12 +52,6 @@ export const BottomsheetHalf = (props: {
         rubberband: true,
       }
     );
-
-    function scrollContent() {
-      if (document.getElementById("content")!.scrollTop > 0) {
-        setInScroll(false);
-      } else setInScroll(true);
-    }
 
     const transition = useTransition(props.active, {
       from: { transform: "translate3d(0px, 100%, 0px)" },
@@ -100,7 +93,6 @@ export const BottomsheetHalf = (props: {
                   id="content"
                   className="overflow-y-scroll overflow-x-hide relative mt-10"
                   style={{ touchAction: "pan-y", maxHeight: "60vh" }}
-                  onScroll={scrollContent}
                 >
                   <div>{props.children}</div>
                 </div>

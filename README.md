@@ -1,1 +1,1 @@
-# bottom-sheet-research
+#Bottom sheet exploration with tailwind as css library, react spring animation library, and use gesture as gesture library
